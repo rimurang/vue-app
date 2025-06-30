@@ -12,7 +12,7 @@
     <h2>reactive 객체 실습</h2>
     <input type="text" v-model="user.firstName" placeholder="이름 입력" />
     <input type="text" v-model="user.lastName" placeholder="성 입력" />
-    <p>안녕하세요, {{ user.lastName }}{{ user.firstName }}님!</p>
+    <p>안녕하세요, {{ user.lastName }}{{ user.firstName }}님! 랄랄라</p>
   </div>
 </template>
 
