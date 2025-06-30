@@ -1,5 +1,10 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+1. 반응형 데이터 다뤄보기 (ref vs reactive)
+- ref와 reactive의 차이를 이해하고 사용해본다
+- 텍스트 입력으로 데이터를 바꾸는 실습을 해본다
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+2. 이벤트 처리 & 메서드로 데이터 바꾸기
+- Vue에서 @click 등의 이벤트 처리 방법을 배운다
+- 함수(메서드)를 작성해서 데이터를 바꾸는 방법을 익힌다
+- 버튼을 눌러 숫자를 증가/감소하는 카운터 앱을 만들어본다
