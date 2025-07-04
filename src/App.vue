@@ -41,6 +41,48 @@
 
       <p v-if="todos.length === 0" class="empty">할 일이 없습니다.</p>
     </ul>
+
+    <hr />
+
+    <h2>조건부 렌더링과 반복 렌더링 완벽 이해</h2>
+
+    <h3>조건부 렌더링</h3>
+    <p v-if="score >= 90">A 학점</p>
+    <p v-else-if="score >= 80">B 학점</p>
+    <p v-else>C 학점</p>
+    <p v-show="score >= 80">내 학점은 ? {{ score }}학점</p>
+    <p v-show="visible">보이죠</p>
+    <p v-show="invisible">안보이죠</p>
+
+    <h3>반복 렌더링</h3>
+    <ul>
+      <li v-for="(fruit, index) in fruits" :key="index">
+        {{ index + 1 }}. {{ fruit }}
+      </li>
+    </ul>
+
+    <h3>렌더링 실습 : 점수에 따른 메시지와 과일 리스트 출력</h3>
+    <div class="score-box">
+      <input
+        type="number"
+        v-model="stScore"
+        placeholder="점수를 입력하세요 (0~100)"
+        min="0"
+        max="0"
+      />
+    </div>
+    <div class="grade-message">
+      <p v-if="stScore >= 80" class="grade a">훌륭합니다</p>
+      <p v-else-if="stScore >= 70" class="grade b">잘했어요</p>
+      <p v-else-if="stScore >= 60" class="grade c">노력해봐요</p>
+      <p v-else="stScore >= 50" class="grade d">다음엔 더 잘할 수 있어요</p>
+    </div>
+
+    <ul>
+      <li v-for="(color, index) in colors" :key="index">
+        {{ index + 1 }}. {{ color }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -48,7 +90,7 @@
 import { ref, reactive } from "vue";
 import TodoItem from "./components/TodoItem.vue";
 
-/* ref / reactive 실습 */
+/* S: ref / reactive 실습 */
 const message = ref("🤖"); // 단일값
 const name = ref("외계인"); // 단일값
 const age = ref(5); // 단일값
@@ -72,8 +114,9 @@ function countIncrease() {
 function countReset() {
   count.value = initCount; // 0으로 설정
 }
+/* E: ref / reactive 실습 */
 
-/* Todo 앱 */
+/* S: Todo 앱 */
 const newTodo = ref("");
 const todos = ref(["Vue 공부하기", "밥 먹기"]);
 
@@ -91,6 +134,18 @@ function removeTodo(index) {
   // todo 삭제
   todos.value.splice(index, 1); //todos 배열에서 index 요소 제거
 }
+/* E: Todo 앱 */
+
+/* S: 조건부 렌더링과 반복 렌더링 완벽 이해 */
+const score = ref(85);
+const visible = true;
+const invisible = false;
+
+const fruits = ["두리안", "망고", "푸릇"];
+
+const stScore = ref(75);
+const colors = ["초록", "빨강", "보라"];
+/* E: 조건부 렌더링과 반복 렌더링 완벽 이해 */
 </script>
 
 <style scoped>
@@ -116,5 +171,17 @@ button {
 
 button:hover {
   background-color: #746dd6;
+}
+ul {
+  display: flex;
+  gap: 3px;
+}
+ul li {
+  list-style: none;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 0 2px;
 }
 </style>
