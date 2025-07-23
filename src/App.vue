@@ -110,12 +110,46 @@
       </p>
       <p :style="{ color: isRed ? 'red' : 'blue' }">:style 테스트</p>
     </div>
+
+    <hr />
+
+    <h2 class="final">최종 실습 - 메모장앱 만들기</h2>
+    <input v-model="newMemo" type="text" placeholder="메모를 입력하세요." />
+    <button @click="addMemo">추가</button>
+
+    <ul class="memo-list">
+      <MemoItem
+        v-for="(memo, index) in memos"
+        :key="index"
+        :text="memo"
+        @delete="deleteMemo(index)"
+      ></MemoItem>
+    </ul>
+
+    <p v-if="memos.length === 0" class="empty">메모가 없습니다.</p>
+
+    <ul class="memo-step">
+      <li>[사용자가 입력창에 새 메모 작성]</li>
+      <li>↓ (v-model="newMemo")</li>
+      <li>[추가 버튼 클릭 → addMemo()]</li>
+      <li>↓</li>
+      <li>[memos 배열에 새 항목 추가]</li>
+      <li>↓</li>
+      <li>[v-for로 각 메모 출력 → MemoItem 컴포넌트로 전달]</li>
+      <li>↓</li>
+      <li>[삭제 버튼 클릭 → emit('delete') → 부모에서 deleteMemo(index)]</li>
+      <li>↓</li>
+      <li>[memos 배열에서 항목 제거]</li>
+      <li>↓</li>
+      <li>[watch로 localStorage에 자동 저장]</li>
+    </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import TodoItem from "./components/TodoItem.vue";
+import MemoItem from "./components/MemoItem.vue";
 
 /* S: ref / reactive 실습 */
 const message = ref("🤖"); // 단일값
@@ -183,6 +217,41 @@ function selectDesserts(dessert) {
 
 const isRed = true;
 /* E: 동적 스타일과 클래스 바인딩 */
+
+/* S: 메모장앱만들기 */
+const newMemo = ref("");
+const memos = ref([]);
+
+function addMemo() {
+  if (newMemo.value.trim()) {
+    memos.value.push(newMemo.value.trim());
+    newMemo.value = "";
+    // 입력된 값을 newMemo에 바인딩
+    // memos 배열에 메모 추가 + 입력값 초기화
+  }
+}
+function deleteMemo(index) {
+  // memo 삭제
+  memos.value.splice(index, 1); //memos 배열에서 index 요소 1개 제거
+}
+
+//onMounted : 컴포넌트가 처음 로드될때 localStorage에서 저장된 메모들을 불러옴
+onMounted(() => {
+  const saved = localStorage.getItem("memos");
+  if (saved) {
+    memos.value = JSON.parse(saved);
+  }
+});
+//watch : memos 값이 바뀔때마다  localStorage에 새로 저장
+// deep:true : 배열 내부 항목 변경까지 감지 가능
+watch(
+  memos,
+  (newVal) => {
+    localStorage.setItem("memos", JSON.stringify(newVal));
+  },
+  { deep: true }
+);
+/* E: 메모장앱만들기 */
 </script>
 
 <style scoped>
@@ -227,5 +296,30 @@ ul li {
 .fruit-list .selected {
   color: #fff;
   background: #000;
+}
+
+h2.final {
+  color: #fff;
+  background: #000;
+}
+
+.memo-list {
+  display: flex;
+  flex-direction: column;
+}
+.memo-step {
+  display: flex;
+  flex-direction: column;
+  background: #202235;
+  color: #6677b5;
+  padding: 10px;
+  text-align: left;
+}
+.memo-step li {
+  border: 0;
+  padding: 2px;
+}
+.memo-step li::marker {
+  display: none;
 }
 </style>
