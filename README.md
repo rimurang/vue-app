@@ -32,3 +32,12 @@ reactive : 객체, 배열 같은 복합 자료형 (바로 접근 가능)
 - v-if, v-else-if, v-else : 조건에 따라 필요한 요소만 DOM에 추가 (무거운 UI에 적합)
 - v-show : DOM에 남아있고 스타일 display(none)로 노출 처리 (자주 토글되는 UI에 적합)
 - v-for : 배열 순회, key 설정해야 성능&안정성 확보 
+
+
+## 5. 동적 스타일과 클래스 바인딩
+- :class, :style 디렉티브로 상태에 따라 동적인 UI 표현
+
+
+## 6. 미니 프로젝트 - 메모장앱 만들기
+- ref, v-for, v-model, @click, props, emit, 조건부 렌더링, 동적 클래스 등을 활용
+- onMounted, watch, deep 활용하여 localStroage로 데이터 저장/복원
