@@ -143,6 +143,124 @@
       <li>↓</li>
       <li>[watch로 localStorage에 자동 저장]</li>
     </ul>
+
+    <hr />
+
+    <h2 class="final" style="background: red">템플릿 문법 요약</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>문법</th>
+          <th>역할</th>
+          <th>예시</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            <pre v-pre>
+<code>{{ exname }}</code></pre>
+          </th>
+          <td>출력</td>
+          <td>
+            <pre v-pre>
+<code>&lt;p&gt;{{ exname }}&lt;/p&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>v-model</th>
+          <td>양방향 바인딩</td>
+          <td>
+            <pre v-pre>
+<code>&lt;input v-model="exmsg" /&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>v-if / v-else</th>
+          <td>조건부 렌더링</td>
+          <td>
+            <pre v-pre>
+<code>&lt;p v-if="count > 0">Positive&lt;/p&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>v-for</th>
+          <td>리스트 렌더링</td>
+          <td>
+            <pre v-pre>
+<code>&lt;li v-for="item in items"&gt;{{ item }}&lt;/li&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>:key</th>
+          <td>리스트 식별</td>
+          <td>
+            <pre v-pre><code>&lt;li :key="index"&gt;&lt;/li&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>:class</th>
+          <td>조건부 클래스 적용</td>
+          <td>
+            <pre
+              v-pre
+            ><code>&lt;div :class="{ active: isActive }"&gt;&lt;/div&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>:style</th>
+          <td>인라인 스타일 바인딩</td>
+          <td>
+            <pre
+              v-pre
+            ><code>&lt;p :style="{ color: 'red' }">&gt;">제출&lt;/button&gt;</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <th>props / emit</th>
+          <td>부모-자식 통신</td>
+          <td>자식은 props 받고 emit으로 이벤트 발생</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="final" style="background: red">
+      Composition API 주요 기능 요약
+    </h2>
+    <table>
+      <thead>
+        <tr>
+          <th>함수</th>
+          <th>역할</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ref()</td>
+          <td>단일 값 반응형 상태</td>
+        </tr>
+        <tr>
+          <td>reactive()</td>
+          <td>객체/배열 반응형 상태</td>
+        </tr>
+        <tr>
+          <td>watch()</td>
+          <td>상태 변화 감지</td>
+        </tr>
+        <tr>
+          <td>onMounted()</td>
+          <td>컴포넌트 마운트 시 실행</td>
+        </tr>
+        <tr>
+          <td>defineProps()</td>
+          <td>자식 컴포넌트에서 props 받기</td>
+        </tr>
+        <tr>
+          <td>$emit()</td>
+          <td>자식 > 부모 이벤트 전송</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -321,5 +439,20 @@ h2.final {
 }
 .memo-step li::marker {
   display: none;
+}
+
+table {
+  width: 100%;
+}
+table th,
+table td {
+  border: 1px solid #ddd;
+}
+table thead th {
+  background: #ddd;
+}
+table tbody th {
+}
+table tbody td {
 }
 </style>
