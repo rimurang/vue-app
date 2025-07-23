@@ -6,8 +6,10 @@
     <h2>reactive 객체 실습</h2>
 
     <h3>이름을 입력해보세요</h3>
-    <input type="text" v-model="name" placeholder="이름 입력" />님,
-    <input type="text" v-model="age" placeholder="나이 입력" />살
+    <input type="text" v-model="name" placeholder="이름 입력" />
+    님,
+    <input type="text" v-model="age" placeholder="나이 입력" />
+    살
     <p>안녕하세요, {{ name }}님! {{ name }}님의 나이는 {{ age }}살</p>
 
     <input type="text" v-model="user.firstName" placeholder="이름 입력" />
@@ -36,8 +38,7 @@
         :key="index"
         :item="todo"
         @remove="removeTodo(index)"
-      >
-      </TodoItem>
+      ></TodoItem>
 
       <p v-if="todos.length === 0" class="empty">할 일이 없습니다.</p>
     </ul>
@@ -83,6 +84,32 @@
         {{ index + 1 }}. {{ color }}
       </li>
     </ul>
+
+    <hr />
+
+    <h2>동적 스타일과 클래스 바인딩</h2>
+
+    <h3>좋아하는 빵 선택하기</h3>
+
+    <div class="fruit-wrap">
+      <ul class="fruit-list">
+        <li
+          v-for="(dessert, index) in desserts"
+          :key="index"
+          :class="{ selected: selectedDesserts === dessert }"
+          @click="selectDesserts(dessert)"
+        >
+          {{ dessert }}
+        </li>
+      </ul>
+
+      <p v-if="selectedDesserts" class="result">
+        당신이 선택한 빵은
+        <strong>{{ selectedDesserts }}</strong>
+        입니다!
+      </p>
+      <p :style="{ color: isRed ? 'red' : 'blue' }">:style 테스트</p>
+    </div>
   </div>
 </template>
 
@@ -146,6 +173,16 @@ const fruits = ["두리안", "망고", "푸릇"];
 const stScore = ref(75);
 const colors = ["초록", "빨강", "보라"];
 /* E: 조건부 렌더링과 반복 렌더링 완벽 이해 */
+
+/* S: 동적 스타일과 클래스 바인딩 */
+const desserts = ref(["휘낭시에", "밤식빵", "크림빵"]);
+const selectedDesserts = ref("");
+function selectDesserts(dessert) {
+  selectedDesserts.value = dessert;
+}
+
+const isRed = true;
+/* E: 동적 스타일과 클래스 바인딩 */
 </script>
 
 <style scoped>
@@ -183,5 +220,12 @@ ul li {
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 0 2px;
+}
+
+.fruit-list {
+}
+.fruit-list .selected {
+  color: #fff;
+  background: #000;
 }
 </style>
